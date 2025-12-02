@@ -154,6 +154,7 @@ variable "vms_ssh_root_key" {
 ```
 
 Изменений нет
+
 ![img3](img/img3.jpg)
 
 
