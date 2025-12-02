@@ -308,6 +308,46 @@ variable "vm_db_hw_disk_size" {
 
 ### Решение 4
 
+Красивый вывод
+
+![img7](img/img7.jpg)
+
+```
+ cat outputs.tf
+# Main output for assignment 4 - contains instance_name, external_ip, fqdn for each VM
+output "vm_instances" {
+  description = "Information about created virtual machines (instance_name, external_ip, fqdn)"
+  value = {
+    web = {
+      instance_name = yandex_compute_instance.platform_web.name
+      external_ip   = yandex_compute_instance.platform_web.network_interface.0.nat_ip_address
+      fqdn          = yandex_compute_instance.platform_web.fqdn
+    }
+    db = {
+      instance_name = yandex_compute_instance.platform_db.name
+      external_ip   = yandex_compute_instance.platform_db.network_interface.0.nat_ip_address
+      fqdn          = yandex_compute_instance.platform_db.fqdn
+    }
+  }
+}
+
+# Additional informative outputs (optional)
+output "vm_details" {
+  description = "Detailed information about all VMs"
+  value = [
+    for vm in [yandex_compute_instance.platform_web, yandex_compute_instance.platform_db] : {
+      name        = vm.name
+      external_ip = vm.network_interface.0.nat_ip_address
+      internal_ip = vm.network_interface.0.ip_address
+      fqdn        = vm.fqdn
+      zone        = vm.zone
+      status      = vm.status
+    }
+  ]
+}
+
+```
+
 ### Задание 5
 
 1. В файле locals.tf опишите в **одном** local-блоке имя каждой ВМ, используйте интерполяцию ${..} с НЕСКОЛЬКИМИ переменными по примеру из лекции.
