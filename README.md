@@ -675,6 +675,7 @@ resource "yandex_compute_instance" "platform_db" {
 Терраформ сообщает что нет изменений инфраструктуры
 ![img9](img/img9.jpg)
 
+Итоговые файлы приложены в репозитории в https://github.com/ViktorLebedev93/terraform_hw-02.md/tree/main/hw02
 
 ### Правила приёма работы
 Для подключения предварительно через ssh измените пароль пользователя: sudo passwd ubuntu
