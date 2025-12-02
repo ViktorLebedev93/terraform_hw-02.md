@@ -166,6 +166,139 @@ variable "vms_ssh_root_key" {
 
 ### Решение 3
 
+Вторая машина в зоне ru-central1-b создалась
+
+![img5](img/img5.jpg)
+
+![img6](img/img6.jpg)
+
+```
+ cat vms_platform.tf
+# Variables for Web VM (vm_web_)
+variable "family_name" {
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "Семейство устанавливаемой ОС"
+}
+
+variable "vm_web_name" {
+  type        = string
+  default     = "netology-develop-platform-web"
+  description = "Имя виртуальной машины"
+}
+
+variable "vm_web_platform_id" {
+  type        = string
+  default     = "standard-v1"
+  description = "ID виртуальной платформы"
+}
+
+variable "vm_web_hw_cores" {
+  type        = number
+  default     = 2
+  description = "Количество виртуальных ядер"
+}
+
+variable "vm_web_hw_memory" {
+  type        = number
+  default     = 1
+  description = "Объем оперативной памяти"
+}
+
+variable "vm_web_core_frac" {
+  type        = number
+  default     = 20
+  description = "Ограничение пиковой производительности CPU"
+}
+
+variable "vm_web_hw_preemptible" {
+  type        = bool
+  default     = true
+  description = "Прерываемость работы ВМ"
+}
+
+variable "vm_web_hw_nat" {
+  type        = bool
+  default     = true
+  description = "Активировать NAT"
+}
+
+variable "vm_web_hw_serial_port_enable" {
+  type        = number
+  default     = 1
+  description = "Активировать серийный порт для удаленного доступа"
+}
+
+# Variables for DB VM (vm_db_)
+variable "vm_db_name" {
+  type        = string
+  default     = "netology-develop-platform-db"
+  description = "Имя виртуальной машины для базы данных"
+}
+
+variable "vm_db_platform_id" {
+  type        = string
+  default     = "standard-v1"
+  description = "ID виртуальной платформы для DB VM"
+}
+
+variable "vm_db_hw_cores" {
+  type        = number
+  default     = 2
+  description = "Количество виртуальных ядер для DB VM"
+}
+
+variable "vm_db_hw_memory" {
+  type        = number
+  default     = 2
+  description = "Объем оперативной памяти для DB VM"
+}
+
+variable "vm_db_core_frac" {
+  type        = number
+  default     = 20
+  description = "Ограничение пиковой производительности CPU для DB VM"
+}
+
+variable "vm_db_hw_preemptible" {
+  type        = bool
+  default     = true
+  description = "Прерываемость работы DB VM"
+}
+
+variable "vm_db_hw_nat" {
+  type        = bool
+  default     = true
+  description = "Активировать NAT для DB VM"
+}
+
+variable "vm_db_hw_serial_port_enable" {
+  type        = number
+  default     = 1
+  description = "Активировать серийный порт для удаленного доступа DB VM"
+}
+
+variable "vm_db_zone" {
+  type        = string
+  default     = "ru-central1-b"
+  description = "Зона доступности для DB VM"
+}
+
+# Disk size variables
+variable "vm_web_hw_disk_size" {
+  type        = number
+  default     = 15
+  description = "Boot disk size in GB for Web VM"
+}
+
+variable "vm_db_hw_disk_size" {
+  type        = number
+  default     = 15
+  description = "Boot disk size in GB for DB VM"
+}
+
+```
+
 ### Задание 4
 
 1. Объявите в файле outputs.tf **один** output , содержащий: instance_name, external_ip, fqdn для каждой из ВМ в удобном лично для вас формате.(без хардкода!!!)
